@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import ButtonComponent from './component/ButtonComponent.vue';
 import GlobalComponent from './component/GlobalComponent.vue';
+import VModelComponent from './component/VModelComponent.vue';
 
 const NhanVien = ref([
   {
@@ -62,6 +63,16 @@ const NhanVien = ref([
   }
 ]);
 const number = ref(3)
+const count = ref(0)
+const incre = ()=>{
+  count.value ++
+}
+const username = ref('hiepnvph55452')
+const email = ref('ngohiep2675@gmail.com')
+const UpdateCha = ()=>{
+  username.value = 'Cha'
+  email.value = 'Cha email'
+}
 </script>
 
 <template>
@@ -129,6 +140,17 @@ const number = ref(3)
 <!-- Component Toan cuc : moi noi deu goi duoc  -->
  <h1>Cha: <ComponentA/></h1>
 <!-- <GlobalComponent/> -->
+ <!-- ------------------------------------ -->
+  <p>Count = {{ count }}</p>
+ <ButtonComponent :countValue ="number" @increNumber="incre"/>
+
+</div>
+<div>
+  <h1>V-model</h1>
+  <!-- Ho tro binding nhieu chieu tu vue 3.4 tro len -->
+  <p>Cha : {{ username }} - {{ email }}</p>
+  <VModelComponent v-model:u1="username" v-model:e1="email"/>
+  <button   @click="UpdateCha()">Update cha</button>
 </div>
 </template>
 
