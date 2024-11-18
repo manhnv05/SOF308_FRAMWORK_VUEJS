@@ -1,6 +1,7 @@
 <template>
   <section class="container mt-4">
     <h1 class="text-center text-success mb-4">Đây là Máy Tính</h1>
+    <FormMayTinhComponent/>
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
         <thead class="table-success">
@@ -33,6 +34,7 @@
 </template>
 
 <script setup>
+import FormMayTinhComponent from "@/component/FormMayTinhComponent.vue";
 import { ref } from "vue";
 
 const listMayTinh = ref([
