@@ -784,7 +784,7 @@ function addSach() {
     return;
   }
   Sach.value.push({
-    id: Date.now().toString(), // Gen id duy nhat
+    id: Date.now().toString(), // Gen id duy nhat bang cach lay thoi gian mili giay 
     ten: newSachname.value,
     loai: newSachloai.value,
     tacGia: newSachtg.value,
