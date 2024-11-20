@@ -1,7 +1,9 @@
 <template>
   <section class="container mt-4">
     <h1 class="text-center text-success mb-4">Đây là Máy Tính</h1>
-    <FormMayTinhComponent/>
+     <FormMayTinhComponent v-model:mt="NewMayTinh"/>
+      <input type="button" value="Add" @click="Add" v-show="!isUpdate">
+      <input type="button" value="Update" @click="Update" v-show="isUpdate">
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
         <thead class="table-success">
@@ -24,6 +26,7 @@
               <td>{{ m.descption }}</td>
               <td>
                 <button class="btn btn-danger btn-sm" @click="Delete(m.id)">Xóa</button>
+                <button class="btn btn-safe btn-sm" @click="Detail(m)">Detail</button>
               </td>
             </tr>
           </template>
@@ -512,10 +515,43 @@ const Delete = (id) => {
   const index = listMayTinh.value.findIndex((m) => m.id === id);
   listMayTinh.value.splice(index, 1);
 };
+const NewMayTinh = ref({
+    name:'' ,
+    price: 0,
+    descption: ''
+})
+const Add = ()=>{
+  listMayTinh.value.push(
+    {
+      id: listMayTinh.value.length +1,
+      ... NewMayTinh.value,
+    }
+  )
+  resetValue()
+}
+const resetValue = ()=>{
+  NewMayTinh.value = {
+     name:'' ,
+    price: 0,
+    descption: ''
+  }
+}
+const isUpdate = ref(false)
+const viTri = ref(-1)
+const Update = ()=>{
+    listMayTinh.value[viTri.value] = {...NewMayTinh.value}  
+   resetValue()
+  isUpdate.value = false
+  viTri.value = -1 
+}
+const Detail = (item)=>{
+  NewMayTinh.value = {...item},
+  isUpdate.value = true 
+  viTri.value = listMayTinh.value.findIndex((m) => m.id === item.id);
+}
 </script>
 
 <style>
-/* Tuỳ chỉnh thêm nếu cần */
 body {
   background-color: #f9f9f9;
   font-family: Arial, sans-serif;
